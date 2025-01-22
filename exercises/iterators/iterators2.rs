@@ -6,16 +6,17 @@
 // Execute `rustlings hint iterators2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 // Step 1.
 // Complete the `capitalize_first` function.
 // "hello" -> "Hello"
 pub fn capitalize_first(input: &str) -> String {
-    let mut c = input.chars();
+    let mut c = input.trim().chars();
     match c.next() {
         None => String::new(),
-        Some(first) => ???,
+        Some(first) => first.to_uppercase().to_string() + c.as_str(),
+        //use trim to erase space
     }
 }
 
@@ -24,7 +25,10 @@ pub fn capitalize_first(input: &str) -> String {
 // Return a vector of strings.
 // ["hello", "world"] -> ["Hello", "World"]
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    vec![]
+    words.iter().map(|&word|capitalize_first(word)).filter(|word| !word.is_empty()).collect::<Vec<String>>()
+    //map:use closure to capitalize all words
+    //filter:erase empty String
+    //collect:make sure it's a vec
 }
 
 // Step 3.
@@ -32,7 +36,11 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // Return a single string.
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
-    String::new()
+    words.iter().map(|&word|capitalize_first(word)).filter(|word| !word.is_empty()).collect::<Vec<String>>().join(" ")
+    //map:use closure to capitalize all words
+    //filter:erase empty String
+    //collect:make sure it's a vec
+    //join:make sure it's a string, joined with space
 }
 
 #[cfg(test)]
